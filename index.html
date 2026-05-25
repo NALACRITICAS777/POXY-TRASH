@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POXY TRASH </title>
+    <title>N_LAND | Hub y Comentarios</title>
     <link rel="icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/3f87bd40-3b9a-40e0-8501-0e6c4040dc0c-profile_image-300x300.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -65,8 +66,8 @@
 
         .container { width: 100%; max-width: 650px; z-index: 1; display: flex; flex-direction: column; align-items: center; }
         
-        .social-links { display: flex; gap: 15px; margin: 10px 0 30px 0; justify-content: center; width: 100%; }
-        .social-btn { padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; transition: 0.3s ease; }
+        .social-links { display: flex; gap: 15px; margin: 10px 0 30px 0; justify-content: center; width: 100%; flex-wrap: wrap; }
+        .social-btn { padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s ease; }
         .social-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
         .btn-kick { background: var(--kick); color: black; }
         .btn-yt { background: var(--yt); color: white; }
@@ -75,7 +76,8 @@
         .menu-toggle {
             position: fixed; top: 25px; right: 25px; z-index: 1001;
             background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
-            padding: 12px; border-radius: 12px; cursor: pointer; display: flex; flex-direction: column; gap: 5px;
+            padding: 12px; border-radius: 12px; cursor: pointer; display: flex;
+            flex-direction: column; gap: 5px;
         }
         .menu-toggle span { display: block; width: 25px; height: 3px; background: white; border-radius: 2px; }
 
@@ -131,7 +133,6 @@
         .action-link { color: var(--accent); cursor: pointer; font-size: 0.8rem; font-weight: bold; transition: 0.2s; }
         .action-link:hover { filter: brightness(1.3); text-decoration: underline; }
 
-        /* MODO ADMIN SECRETO */
         .delete-btn { display: none; color: #ff4d4d; cursor: pointer; font-size: 0.9rem; font-weight: bold; margin-left: auto; transition: 0.2s; }
         .delete-btn:hover { filter: brightness(1.3); transform: scale(1.1); }
         body.admin-mode .delete-btn { display: inline-block; }
@@ -150,69 +151,163 @@
 
         .loading-text { text-align: center; color: var(--accent); font-weight: bold; padding: 30px; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        /* =========================================
+           ESTILOS DEL HUB N_LAND (NUEVOS)
+        ========================================= */
+        #hub-principal {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 85vh; z-index: 10; text-align: center; width: 100%; max-width: 800px; margin: auto;
+        }
+        .mc-title {
+            font-family: 'Black Ops One', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: #53fc18;
+            text-shadow: 0 0 20px rgba(83, 252, 24, 0.5), 5px 5px 0px #111;
+            margin: 0 0 10px 0;
+            line-height: 1;
+        }
+        .mc-version {
+            font-size: 1.2rem; font-weight: bold; color: #fff;
+            background: rgba(0,0,0,0.6); padding: 8px 20px; border-radius: 20px;
+            margin-bottom: 30px; border: 1px solid #53fc18;
+        }
+        .ip-box {
+            background: rgba(0,0,0,0.7); padding: 20px 40px; border: 2px dashed #53fc18;
+            display: inline-block; font-family: monospace; font-size: 1.8rem;
+            cursor: pointer; transition: 0.3s; margin-bottom: 30px; border-radius: 10px;
+        }
+        .ip-box:hover { background: rgba(83, 252, 24, 0.2); }
+        .ip-box span { display: block; font-size: 0.8rem; color: #aaa; margin-top: 5px; }
+
+        .btn-mods {
+            background: #00b2e1; color: white; padding: 15px 30px; text-decoration: none;
+            border-radius: 10px; font-weight: 900; font-size: 1.2rem;
+            text-transform: uppercase; display: inline-block; margin-bottom: 15px; transition: 0.3s;
+        }
+        .btn-mods:hover { background: #0091b5; transform: scale(1.05); }
+
+        .instrucciones {
+            background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px;
+            max-width: 500px; font-size: 0.95rem; color: #ccc; margin-bottom: 40px;
+            text-align: left; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-abrir-comentarios {
+            background: var(--yt); color: white; padding: 15px 40px; border: none;
+            border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,0,0,0.4); transition: 0.3s; margin-top: 20px;
+        }
+        .btn-abrir-comentarios:hover { transform: translateY(-3px); filter: brightness(1.2); }
+
+        /* =========================================
+           CONTENEDOR DE COMENTARIOS OCULTO
+        ========================================= */
+        #seccion-comentarios {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh;
+            background: var(--bg); z-index: 500; padding: 60px 20px 20px; box-sizing: border-box;
+        }
+        .btn-cerrar-comentarios {
+            position: fixed; top: 20px; left: 20px; background: #333; color: white;
+            border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;
+            font-weight: bold; z-index: 1501; transition: 0.3s;
+        }
+        .btn-cerrar-comentarios:hover { background: #555; }
     </style>
 </head>
 <body>
 
 <div class="orb orb-1"></div><div class="orb orb-2"></div>
-<div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-<div id="imgViewer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out;" onclick="this.style.display='none'">
-    <img id="imgViewerTarget" style="width:90vw; height:90vh; object-fit:contain; border-radius:15px; box-shadow:0 10px 50px rgba(0,0,0,0.8);">
-</div>
-
-<div class="top-section" id="topSection">
-    <h2 style="text-align: center; font-size: 0.9rem; letter-spacing: 4px; margin-bottom: 30px;">RANKING</h2>
-    <div class="top-box"><h3>Mejor Valorado 👍</h3><div id="top-likes"></div></div>
-    <div class="top-box"><h3>Más Odiado 💀</h3><div id="top-dislikes"></div></div>
-    <div class="top-box"><h3>Tomateada 🍅</h3><div id="top-tomates"></div></div>
-</div>
-
-<div class="modal-overlay" id="pollModal">
-    <div class="modal-box">
-        <h3 style="margin-top: 0; color: white; text-align: center;">Crear Encuesta 📊</h3>
-        <input type="text" id="pollUsername" placeholder="Tu Nickname...">
-        <input type="text" id="pollTheme" placeholder="¿Qué quieres preguntar?">
-        <div id="pollOptionsContainer">
-            <input type="text" class="p-opt" placeholder="Opción 1">
-            <input type="text" class="p-opt" placeholder="Opción 2">
-        </div>
-        <button class="add-opt-btn" id="btnAddOption" onclick="addPollOption()">+ Añadir opción</button>
-        <div style="display: flex; gap: 10px;">
-            <button class="send-btn" onclick="closePollModal()" style="background: #222; color: white;">Cerrar</button>
-            <button class="send-btn" onclick="sendPollDirect()" style="background: var(--accent); color: white;">Lanzar</button>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <header style="text-align: center; margin-bottom: 20px;">
-        <h1 class="logo">POXY TRASH</h1>
-        <div class="social-links">
-            <a href="https://kick.com/luisardito" target="_blank" class="social-btn btn-kick">Kick</a>
-            <a href="https://www.youtube.com/@Luisarditoprime" target="_blank" class="social-btn btn-yt">YouTube</a>
-            <a href="https://www.instagram.com/luisarditooo" target="_blank" class="social-btn btn-ig">Instagram</a>
-        </div>
-    </header>
-
-    <div class="input-card" id="dropZone">
-        <input type="text" id="username" placeholder="Nickname...">
-   
-        <textarea id="commentText" rows="3" placeholder="Escribe tu comentario o arrastra un archivo aquí..."></textarea>
-        
-        <div id="mediaPreview" class="media-preview-box"></div>
-        <input type="file" id="fileInput" accept="image/*,video/mp4,video/webm" style="display:none;" onchange="handleFileSelect(event)">
-
-        <div style="display: flex; gap: 10px;">
-            <button class="poll-trigger-btn" onclick="openPollModal()" title="Encuesta">📊</button>
-            <button class="poll-trigger-btn" onclick="document.getElementById('fileInput').click()" title="Adjuntar">📁</button>
-            <button class="send-btn" onclick="addComment(null)">COMENTA PAPU</button>
-        </div>
+<div id="hub-principal">
+    <h1 class="mc-title">N_LAND</h1>
+    <div class="mc-version">Minecraft Java 1.20.1</div>
+    
+    <div class="ip-box" onclick="copyIP()">
+        <b>N_LAND.aternos.me:20942</b>
+        <span>(Click para copiar la IP)</span>
     </div>
 
-    <div id="comments-list" style="width: 100%;">
-        <div id="loader" class="loading-text">Cargando... ⏳</div>
+    <a href="https://www.mediafire.com/file/q676fxngf4yeaud/Minecraft.rar/file" target="_blank" class="btn-mods">
+        📦 Descargar Mods y Emotes
+    </a>
+    
+    <div class="instrucciones">
+        <b>¿Cómo instalar los mods?</b><br><br>
+        1. Descarga el archivo <b>.rar</b> del botón azul.<br>
+        2. Descomprime el archivo y copia todo lo que está dentro.<br>
+        3. Pégalo en tu carpeta <code>.minecraft/mods</code>.<br>
+        4. ¡Abre el juego y entra al server!
+    </div>
+
+    <div class="social-links">
+        <a href="https://kick.com/luisardito" target="_blank" class="social-btn btn-kick">Kick</a>
+        <a href="https://www.youtube.com/@Luisarditoprime" target="_blank" class="social-btn btn-yt">YouTube</a>
+        <a href="https://www.instagram.com/luisarditooo" target="_blank" class="social-btn btn-ig">Instagram</a>
+    </div>
+
+    <button class="btn-abrir-comentarios" onclick="toggleComentariosModal()">
+        💬 ABRIR CHAT / CRÍTICAS
+    </button>
+</div>
+
+<div id="seccion-comentarios">
+    <button class="btn-cerrar-comentarios" onclick="toggleComentariosModal()">❌ VOLVER A N_LAND</button>
+    
+    <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div id="imgViewer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out;" onclick="this.style.display='none'">
+        <img id="imgViewerTarget" style="width:90vw; height:90vh; object-fit:contain; border-radius:15px; box-shadow:0 10px 50px rgba(0,0,0,0.8);">
+    </div>
+
+    <div class="top-section" id="topSection">
+        <h2 style="text-align: center; font-size: 0.9rem; letter-spacing: 4px; margin-bottom: 30px;">RANKING</h2>
+        <div class="top-box"><h3>Mejor Valorado 👍</h3><div id="top-likes"></div></div>
+        <div class="top-box"><h3>Más Odiado 💀</h3><div id="top-dislikes"></div></div>
+        <div class="top-box"><h3>Tomateada 🍅</h3><div id="top-tomates"></div></div>
+    </div>
+
+    <div class="modal-overlay" id="pollModal">
+        <div class="modal-box">
+            <h3 style="margin-top: 0; color: white; text-align: center;">Crear Encuesta 📊</h3>
+            <input type="text" id="pollUsername" placeholder="Tu Nickname...">
+            <input type="text" id="pollTheme" placeholder="¿Qué quieres preguntar?">
+            <div id="pollOptionsContainer">
+                <input type="text" class="p-opt" placeholder="Opción 1">
+                <input type="text" class="p-opt" placeholder="Opción 2">
+            </div>
+            <button class="add-opt-btn" id="btnAddOption" onclick="addPollOption()">+ Añadir opción</button>
+            <div style="display: flex; gap: 10px;">
+                <button class="send-btn" onclick="closePollModal()" style="background: #222; color: white;">Cerrar</button>
+                <button class="send-btn" onclick="sendPollDirect()" style="background: var(--accent); color: white;">Lanzar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin: 0 auto;">
+        <header style="text-align: center; margin-bottom: 20px;">
+            <h1 class="logo">POXY TRASH</h1>
+            <p style="color: #aaa;">Solo críticas al contenido. Compórtate o el server cierra.</p>
+        </header>
+
+        <div class="input-card" id="dropZone">
+            <input type="text" id="username" placeholder="Nickname...">
+            <textarea id="commentText" rows="3" placeholder="Escribe tu comentario o arrastra un archivo aquí..."></textarea>
+            
+            <div id="mediaPreview" class="media-preview-box"></div>
+            <input type="file" id="fileInput" accept="image/*,video/mp4,video/webm" style="display:none;" onchange="handleFileSelect(event)">
+
+            <div style="display: flex; gap: 10px;">
+                <button class="poll-trigger-btn" onclick="openPollModal()" title="Encuesta">📊</button>
+                <button class="poll-trigger-btn" onclick="document.getElementById('fileInput').click()" title="Adjuntar">📁</button>
+                <button class="send-btn" onclick="addComment(null)">COMENTA PAPU</button>
+            </div>
+        </div>
+
+        <div id="comments-list" style="width: 100%;">
+            <div id="loader" class="loading-text">Cargando... ⏳</div>
+        </div>
     </div>
 </div>
 
@@ -220,6 +315,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
 
 <script>
+    // Configuración de Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyD3eXkFJHg7YbPUR5xsdU8JUooG-r1-zPg",
         authDomain: "q-opinas-de-luis.firebaseapp.com",
@@ -229,6 +325,28 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
     
+    // ==========================================
+    // NUEVAS FUNCIONES PARA EL HUB
+    // ==========================================
+    function copyIP() {
+        navigator.clipboard.writeText("N_LAND.aternos.me:20942");
+        alert("¡IP N_LAND.aternos.me:20942 copiada al portapapeles!");
+    }
+
+    function toggleComentariosModal() {
+        const modal = document.getElementById('seccion-comentarios');
+        const hub = document.getElementById('hub-principal');
+        if (modal.style.display === 'block') {
+            modal.style.display = 'none';
+            hub.style.display = 'flex';
+            window.scrollTo(0,0);
+        } else {
+            modal.style.display = 'block';
+            hub.style.display = 'none';
+        }
+    }
+    // ==========================================
+
     const colors = ['#00f2fe', '#4facfe', '#7d5fff', '#f5576c', '#43e97b', '#fe019a', '#00ffcc', '#ffffff', '#ffaa00', '#ffea00', '#ff0055', '#8a2be2', '#00ff00', '#ff4500', '#1e90ff', '#ff1493', '#adff2f', '#00ced1', '#ffb6c1', '#f0e68c', '#dda0dd', '#ff99cc', '#7cfc00', '#00bfff', '#ff6347', '#ffff00', '#ff8c00', '#ba55d3', '#32cd32', '#00fa9a'];
     const initTime = Date.now();
     let currentMediaData = null;
@@ -255,7 +373,6 @@
     function toggleReplyBox(id) { document.getElementById(`reply-box-${id}`).classList.toggle('active'); }
     function toggleRepliesList(id) { document.getElementById(`replies-list-${id}`).classList.toggle('active'); }
 
-    // FUNCION PARA AGRANDAR IMAGEN
     function enlargeImage(src) {
         document.getElementById('imgViewerTarget').src = src;
         document.getElementById('imgViewer').style.display = 'flex';
@@ -294,6 +411,7 @@
 
     function openPollModal() { document.getElementById('pollModal').style.display = 'flex'; }
     function closePollModal() { document.getElementById('pollModal').style.display = 'none'; }
+    
     function addPollOption() {
         const container = document.getElementById('pollOptionsContainer');
         if (container.children.length < 4) {
@@ -351,7 +469,7 @@
         
         if (user === "ADMIN_NALA" && text === "RESETEAR") { database.ref('comentarios').remove(); return; }
         if (!text && !media) return;
-        
+
         database.ref('comentarios').push({ 
             autor: user || "Anónimo", 
             mensaje: text, 
@@ -363,6 +481,7 @@
             likes: 0, dislikes: 0, tomates: 0, 
             fecha: Date.now() 
         });
+
         if(!parentId) { textInput.value = ""; clearMedia(); } else { textInput.value = ""; }
     }
 
@@ -426,8 +545,6 @@
             threadDiv.id = `thread-${post.id}`;
             
             const myVote = localStorage.getItem('v_' + post.id);
-            
-            // AQUI ESTÁ LA MAGIA PARA QUE LAS IMÁGENES SEAN CLICKEABLES
             const mediaHtml = post.media ? (post.mediaType === 'video' ? `<div class="u-media"><video src="${post.media}" controls></video></div>` : `<div class="u-media"><img src="${post.media}" onclick="enlargeImage('${post.media}')" style="cursor:zoom-in;" title="Click para agrandar"></div>`) : "";
             
             threadDiv.innerHTML = `
@@ -538,7 +655,7 @@
             item.className = 'top-item'; item.style.setProperty('--c', m.color);
             let pt = m.mensaje ? m.mensaje.substring(0, 15) + '...' : (m.mediaType === 'video' ? '(Video)' : (m.mediaType === 'image' ? '(Imagen)' : (m.encuesta ? 'Encuesta...' : '...')));
             item.innerHTML = `${icon} <b>${m.autor}</b>: ${pt}`;
-          
+            
             item.onclick = () => {
                 const target = document.getElementById('msg-' + m.id);
                 if (target) { toggleMenu(); target.scrollIntoView({ behavior: 'smooth', block: 'center' }); target.classList.add('highlight-active'); setTimeout(() => target.classList.remove('highlight-active'), 2000); }
