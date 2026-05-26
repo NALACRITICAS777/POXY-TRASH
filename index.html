@@ -2,257 +2,99 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N_LAND | Servidor Épico</title>
-    
+    <title>N_LAND | Servidor</title>
     <link rel="icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/3f87bd40-3b9a-40e0-8501-0e6c4040dc0c-profile_image-300x300.png" type="image/png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --win-bg: #c0c0c0;
             --win-light: #ffffff;
             --win-dark: #808080;
             --win-black: #000000;
-            --win-blue: #000080;
-            --kick-green: #53fc18;
-            --yt-red: #ff0000;
-            --ig-grad: linear-gradient(45deg, #f09433, #bc1888);
         }
 
-        /* MAGIA DEL SCROLL: Esto es lo que hace que te desplaces suave y no aparezcas de golpe (tp) */
         html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Courier New', Courier, monospace; background: #050505; color: white; overflow-x: hidden; }
 
-        body { 
-            margin: 0; font-family: 'Pixelify Sans', 'Segoe UI', sans-serif; 
-            background-color: #050508; color: black; overflow-x: hidden;
-        }
-
-        /* Fondo borroso épico */
         .parallax-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1') no-repeat center center;
-            background-size: cover; filter: brightness(0.4) blur(3px);
+            background-size: cover; filter: brightness(0.3) blur(4px);
         }
 
-        /* Botón Menú Estilo Windows 98 */
-        .menu-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
-            background: var(--win-bg); padding: 8px 12px;
-            border-top: 2px solid var(--win-light); border-left: 2px solid var(--win-light);
-            border-bottom: 2px solid var(--win-black); border-right: 2px solid var(--win-black);
-            cursor: pointer; color: black; font-size: 20px; font-weight: bold;
-        }
-        .menu-btn:active {
-            border-top: 2px solid var(--win-black); border-left: 2px solid var(--win-black);
-            border-bottom: 2px solid var(--win-light); border-right: 2px solid var(--win-light);
+        /* TÍTULO SIN CUADRO */
+        .title-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        h1.main-title { 
+            font-size: 7rem; margin: 0; color: #ff0000; text-shadow: 5px 5px 0px #fff; 
+            text-transform: uppercase; letter-spacing: 10px;
         }
 
-        /* Barra Lateral Derecha */
+        /* BOTONES REDES ESTILO WIN98 */
+        .social-container { display: flex; gap: 15px; margin-top: 30px; }
+        .win-btn {
+            background: var(--win-bg); color: black; border-top: 2px solid var(--win-light);
+            border-left: 2px solid var(--win-light); border-bottom: 2px solid var(--win-black);
+            border-right: 2px solid var(--win-black); padding: 10px 20px; font-weight: bold;
+            text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+        }
+        .win-btn:active { border: 2px solid var(--win-black); }
+
+        /* MENÚ BLOQUE DE TIERRA MC */
+        .menu-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; padding: 15px; background: #8B4513; border: 4px solid #5D2E0A; font-weight: bold; }
         .sidebar {
-            position: fixed; top: 0; right: -350px; width: 300px; height: 100vh;
-            background: var(--win-bg); border-left: 3px solid var(--win-light); z-index: 999;
-            transition: right 0.4s ease-in-out; display: flex; flex-direction: column; padding-top: 80px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.8);
+            position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
+            background: url('https://www.minecrafttexturepacks.com/wp-content/uploads/2012/03/dirt.jpg');
+            border-left: 5px solid #5D2E0A; transition: 0.5s; z-index: 999; padding-top: 100px;
         }
-        .sidebar.active { right: 0; }
-        .sidebar a {
-            color: black; text-decoration: none; font-size: 1.2rem; font-weight: 700;
-            padding: 15px 30px; border-bottom: 1px solid var(--win-dark); border-top: 1px solid var(--win-light);
-            transition: 0.2s;
-        }
-        .sidebar a:hover { background: var(--win-blue); color: white; }
+        .sidebar a { display: block; padding: 20px; color: white; text-decoration: none; font-size: 1.5rem; background: rgba(0,0,0,0.5); margin: 10px; border: 2px solid #333; }
+        .sidebar a:hover { background: #53fc18; color: black; }
 
-        /* Contenedores de Secciones */
-        section {
-            min-height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 20px;
-        }
-
-        /* ESTILO WINDOWS 98 PARA LAS CAJAS */
-        .win-window {
-            background: var(--win-bg); padding: 3px; max-width: 800px; width: 90%;
-            border-top: 2px solid var(--win-light); border-left: 2px solid var(--win-light);
-            border-bottom: 2px solid var(--win-black); border-right: 2px solid var(--win-black);
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.5); margin-bottom: 20px;
-        }
-        .win-titlebar {
-            background: var(--win-blue); color: white; padding: 4px 8px;
-            font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 14px; font-weight: bold;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .win-controls { display: flex; gap: 3px; }
-        .win-ctrl-btn {
-            width: 16px; height: 16px; background: var(--win-bg); color: black;
-            border-top: 1px solid var(--win-light); border-left: 1px solid var(--win-light);
-            border-bottom: 1px solid var(--win-black); border-right: 1px solid var(--win-black);
-            display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900;
-            cursor: default; font-family: 'Segoe UI', sans-serif;
-        }
-        .win-content { padding: 30px; text-align: center; }
-
-        /* TÍTULO N_LAND - TOQUE PERUANO 🇵🇪 */
-        h1.main-title {
-            font-family: 'Black Ops One', cursive; font-size: clamp(3rem, 8vw, 6rem); margin: 0 0 10px 0;
-            background: linear-gradient(90deg, #ff0000 0%, #ff0000 33%, #ffffff 33%, #ffffff 66%, #ff0000 66%, #ff0000 100%);
-            -webkit-background-clip: text; color: transparent; text-shadow: 4px 4px 0px #000;
-        }
-
-        h2.section-title { font-size: 2rem; color: var(--win-blue); margin-bottom: 15px; }
-
-        /* Redes Sociales Redonditas */
-        .social-container { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
-        .social-icon {
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 25px; color: white; text-decoration: none; transition: 0.2s; border: 2px solid var(--win-black);
-            box-shadow: 2px 2px 0px var(--win-black);
-        }
-        .social-icon:hover { transform: scale(1.1); }
-        .icon-kick { background-color: var(--kick-green); color: black; }
-        .icon-yt { background-color: var(--yt-red); }
-        .icon-ig { background: var(--ig-grad); }
-
-        /* Botones de acción Win98 */
-        .btn-action {
-            display: inline-block; padding: 10px 20px; background: var(--win-bg);
-            border-top: 2px solid var(--win-light); border-left: 2px solid var(--win-light);
-            border-bottom: 2px solid var(--win-black); border-right: 2px solid var(--win-black);
-            color: black; font-weight: bold; font-family: inherit; font-size: 1.2rem;
-            text-decoration: none; margin-top: 20px; cursor: pointer;
-        }
-        .btn-action:active {
-            border-top: 2px solid var(--win-black); border-left: 2px solid var(--win-black);
-            border-bottom: 2px solid var(--win-light); border-right: 2px solid var(--win-light);
-        }
-        
-        .ip-text { 
-            font-family: monospace; font-size: 1.8rem; font-weight: bold; 
-            background: white; padding: 10px; margin: 20px 0;
-            border-top: 2px solid var(--win-dark); border-left: 2px solid var(--win-dark);
-            border-bottom: 2px solid var(--win-light); border-right: 2px solid var(--win-light);
-        }
+        /* CUADROS WIN98 PARA INFO */
+        .win-window { background: var(--win-bg); padding: 2px; width: 80%; max-width: 600px; margin: 100px auto; color: black; border: 2px solid black; box-shadow: 10px 10px 0px rgba(0,0,0,0.5); }
+        .win-bar { background: #000080; color: white; padding: 5px; font-weight: bold; display: flex; justify-content: space-between; }
+        .win-body { padding: 20px; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="parallax-bg"></div>
 
-<div class="menu-btn" onclick="toggleSidebar()">
-    ÍNDICE
-</div>
+<div class="menu-btn" onclick="document.getElementById('sidebar').style.right='0'">MENU</div>
 
 <div class="sidebar" id="sidebar">
-    <a href="#inicio" onclick="toggleSidebar()">🏠 Inicio</a>
-    <a href="#servidor" onclick="toggleSidebar()">🎮 IP del Server</a>
-    <a href="#descargas" onclick="toggleSidebar()">📦 Descargar Mods</a>
-    <a href="#descripcion" onclick="toggleSidebar()">📖 Descripción</a>
+    <a href="#inicio" onclick="document.getElementById('sidebar').style.right='-300px'">INICIO</a>
+    <a href="#servidor" onclick="document.getElementById('sidebar').style.right='-300px'">IP SERVER</a>
+    <a href="#descargas" onclick="document.getElementById('sidebar').style.right='-300px'">MODS</a>
 </div>
 
-<section id="inicio">
-    <div class="win-window">
-        <div class="win-titlebar">
-            <span>Home.exe</span>
-            <div class="win-controls">
-                <div class="win-ctrl-btn">_</div>
-                <div class="win-ctrl-btn">□</div>
-                <div class="win-ctrl-btn">X</div>
-            </div>
-        </div>
-        <div class="win-content">
-            <h1 class="main-title">N_LAND</h1>
-            <p style="font-size: 1.2rem; font-weight: bold;">LA COMUNIDAD DE LUISARDITO</p>
-            
-            <div class="social-container">
-                <a href="https://kick.com/luisardito" target="_blank" class="social-icon icon-kick" title="Kick"><i class="fa-brands fa-kickstarter-k"></i></a>
-                <a href="https://www.youtube.com/@Luisarditoprime" target="_blank" class="social-icon icon-yt" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.instagram.com/luisarditooo" target="_blank" class="social-icon icon-ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-        </div>
+<section id="inicio" class="title-container">
+    <h1 class="main-title">N_LAND</h1>
+    <div class="social-container">
+        <a href="https://kick.com/luisardito" class="win-btn">KICK</a>
+        <a href="https://www.youtube.com/@Luisarditoprime" class="win-btn">YOUTUBE</a>
+        <a href="https://www.instagram.com/luisarditooo" class="win-btn">INSTAGRAM</a>
     </div>
 </section>
 
 <section id="servidor">
     <div class="win-window">
-        <div class="win-titlebar">
-            <span>Conexion_Servidor.exe</span>
-            <div class="win-controls">
-                <div class="win-ctrl-btn">_</div>
-                <div class="win-ctrl-btn">□</div>
-                <div class="win-ctrl-btn">X</div>
-            </div>
-        </div>
-        <div class="win-content">
-            <h2 class="section-title">INGRESO A N_LAND</h2>
-            <p>Apunta la IP y métete al servidor de Minecraft Java 1.20.1</p>
-            <div class="ip-text">N_LAND.aternos.me:20942</div>
-            <button class="btn-action" onclick="copiarIP()">Copiar IP <i class="fas fa-copy"></i></button>
+        <div class="win-bar"><span>IP_SERVER.exe</span><span>X</span></div>
+        <div class="win-body">
+            <h2>IP DEL SERVIDOR</h2>
+            <div style="background: white; padding: 20px; border: 2px inset gray;">N_LAND.aternos.me:20942</div>
         </div>
     </div>
 </section>
 
 <section id="descargas">
     <div class="win-window">
-        <div class="win-titlebar">
-            <span>Archivos_Mods.rar</span>
-            <div class="win-controls">
-                <div class="win-ctrl-btn">_</div>
-                <div class="win-ctrl-btn">□</div>
-                <div class="win-ctrl-btn">X</div>
-            </div>
-        </div>
-        <div class="win-content">
-            <h2 class="section-title">DESCARGAR MODS</h2>
-            <p>Paquete oficial necesario para poder entrar al server sin que te tire error.</p>
-            <a href="https://www.mediafire.com/file/q676fxngf4yeaud/Minecraft.rar/file" target="_blank" class="btn-action">
-                Descargar Mediafire <i class="fas fa-download"></i>
-            </a>
+        <div class="win-bar"><span>MODS.rar</span><span>X</span></div>
+        <div class="win-body">
+            <h2>DESCARGA MODS</h2>
+            <a href="https://www.mediafire.com/file/q676fxngf4yeaud/Minecraft.rar/file" class="win-btn">DESCARGAR AHORA</a>
         </div>
     </div>
 </section>
-
-<section id="descripcion">
-    <div class="win-window">
-        <div class="win-titlebar">
-            <span>Readme.txt</span>
-            <div class="win-controls">
-                <div class="win-ctrl-btn">_</div>
-                <div class="win-ctrl-btn">□</div>
-                <div class="win-ctrl-btn">X</div>
-            </div>
-        </div>
-        <div class="win-content">
-            <h2 class="section-title">¿QUÉ ES N_LAND?</h2>
-            <p style="text-align: left; font-size: 1.1rem; line-height: 1.5; background: white; padding: 15px; border: 1px inset var(--win-dark);">
-                N_LAND es el servidor principal de Minecraft creado especialmente para la comunidad y seguidores del chat.<br><br>
-                Aquí no solo vienes a picar piedra, vienes a construir proyectos, usar los emotes únicos que tenemos instalados en los mods y pasarla bien en el hub mientras esperamos los directos.<br><br>
-                ¡Prepárate para la mejor experiencia survival con la gente del stream!
-            </p>
-        </div>
-    </div>
-</section>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("active");
-    }
-
-    // Cerrar menú si haces clic fuera
-    document.addEventListener('click', function(event) {
-        const sidebar = document.getElementById('sidebar');
-        const menuBtn = document.querySelector('.menu-btn');
-        if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-            sidebar.classList.remove('active');
-        }
-    });
-
-    function copiarIP() {
-        navigator.clipboard.writeText("N_LAND.aternos.me:20942");
-        alert("¡Sistema Win98 informa: IP copiada al portapapeles!");
-    }
-</script>
 
 </body>
 </html>
