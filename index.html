@@ -1,642 +1,751 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>N_LAND</title>
 
-<link rel="icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/3f87bd40-3b9a-40e0-8501-0e6c4040dc0c-profile_image-300x300.png">
+<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwXr1pT25M3geQnhnMl3E1PBsAFOx1ipFLqQ&s">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=VT323&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-    font-family:'Montserrat',sans-serif;
-    overflow-x:hidden;
-    background:#0d0d0d;
+font-family:'Orbitron',sans-serif;
+overflow-x:hidden;
+background:#0d0d0d;
+color:white;
 }
 
 /* FONDO */
 
 .parallax-bg{
-    position:fixed;
-    inset:0;
+position:fixed;
+inset:0;
+z-index:-3;
 
-    z-index:-2;
+background:
+linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)),
+url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1');
 
-    background:
-    linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
-    url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1');
+background-size:cover;
+background-position:center;
 
-    background-size:cover;
-    background-position:center;
+filter:blur(2px);
 
-    filter:blur(2px);
+transform:scale(1.04);
+}
 
-    transform:scale(1.03);
+/* GRID */
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+
+background-image:
+linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+background-size:5px 5px;
+
+pointer-events:none;
+
+z-index:-2;
+}
+
+/* PARTICULAS */
+
+.particles{
+position:fixed;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+z-index:-1;
+}
+
+.pixel{
+position:absolute;
+width:4px;
+height:4px;
+background:white;
+opacity:.18;
+animation:float linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+}
+to{
+transform:translateY(-100px);
+}
 }
 
 /* MENU */
 
 .menu-btn{
-    position:fixed;
-
-    top:18px;
-    right:18px;
-
-    z-index:9999;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:14px 18px;
-
-    border-radius:14px;
-
-    background:rgba(18,18,18,.92);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(12px);
-
-    cursor:pointer;
-
-    transition:.2s ease;
+position:fixed;
+top:18px;
+right:18px;
+z-index:9999;
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px 18px;
+border-radius:14px;
+background:rgba(18,18,18,.92);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+cursor:pointer;
+transition:.25s ease;
 }
 
 .menu-btn:hover{
-    transform:translateY(-2px);
+transform:translateY(-2px) scale(1.02);
+box-shadow:0 0 20px rgba(255,255,255,.1);
 }
 
 .menu-btn p{
-    color:white;
-    font-size:14px;
-    font-weight:700;
-    letter-spacing:1px;
+color:white;
+font-size:14px;
+font-weight:700;
+letter-spacing:1px;
 }
 
 .hamburger{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
+display:flex;
+flex-direction:column;
+gap:4px;
 }
 
 .hamburger span{
-    width:22px;
-    height:3px;
-
-    background:white;
-
-    border-radius:999px;
+width:22px;
+height:3px;
+background:white;
+border-radius:999px;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-    position:fixed;
-
-    top:0;
-    right:-320px;
-
-    width:280px;
-    height:100vh;
-
-    z-index:999;
-
-    background:
-    linear-gradient(
-    180deg,
-    rgba(18,18,18,.98),
-    rgba(10,10,10,.98)
-    );
-
-    backdrop-filter:blur(14px);
-
-    border-left:1px solid rgba(255,255,255,.08);
-
-    transition:.35s ease;
-
-    padding-top:90px;
+position:fixed;
+top:0;
+right:-320px;
+width:280px;
+height:100vh;
+z-index:999;
+background:
+linear-gradient(
+180deg,
+rgba(18,18,18,.98),
+rgba(10,10,10,.98)
+);
+backdrop-filter:blur(14px);
+border-left:1px solid rgba(255,255,255,.08);
+transition:.35s ease;
+padding-top:90px;
 }
 
 .sidebar.active{
-    right:0;
+right:0;
 }
 
 .sidebar a{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:18px 24px;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:1rem;
-    font-weight:600;
-
-    border-bottom:1px solid rgba(255,255,255,.05);
-
-    transition:.2s ease;
+display:flex;
+align-items:center;
+gap:12px;
+padding:18px 24px;
+color:white;
+text-decoration:none;
+font-size:1rem;
+font-weight:600;
+border-bottom:1px solid rgba(255,255,255,.05);
+transition:.2s ease;
+cursor:pointer;
 }
 
 .sidebar a:hover{
-    background:rgba(255,255,255,.06);
-    padding-left:32px;
+background:rgba(255,255,255,.06);
+padding-left:32px;
 }
 
 /* SECCIONES */
 
 section{
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:90px 20px;
-
-    opacity:0;
-    transform:translateY(80px);
-
-    transition:
-    opacity .8s ease,
-    transform .8s ease;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:90px 20px;
+opacity:0;
+transform:translateY(80px);
+transition:
+opacity .8s ease,
+transform .8s ease;
 }
 
 section.show{
-    opacity:1;
-    transform:translateY(0);
+opacity:1;
+transform:translateY(0);
 }
 
-/* WINDOWS XP */
+/* WINDOWS */
 
 .window{
-    width:min(980px,95%);
-
-    overflow:hidden;
-
-    background:#ece9d8;
-
-    border:3px solid #0054e3;
-
-    border-radius:10px;
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.45);
+width:min(980px,95%);
+overflow:hidden;
+background:#ece9d8;
+border:3px solid #0054e3;
+border-radius:10px;
+box-shadow:0 15px 40px rgba(0,0,0,.45);
+animation:floaty 5s ease-in-out infinite;
 }
 
-/* TOPBAR */
+@keyframes floaty{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-4px);}
+100%{transform:translateY(0px);}
+}
+
+/* TITLEBAR */
 
 .titlebar{
-    background:
-    linear-gradient(
-    to bottom,
-    #3a93ff 0%,
-    #2072ef 45%,
-    #0057d8 100%
-    );
+background:
+linear-gradient(
+to bottom,
+#3a93ff 0%,
+#2072ef 45%,
+#0057d8 100%
+);
 
-    padding:10px 12px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:2px solid #003ea8;
+padding:10px 12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:2px solid #003ea8;
 }
 
 .titlebar span{
-    color:white;
-
-    font-size:15px;
-    font-weight:700;
-
-    text-shadow:
-    1px 1px 0 rgba(0,0,0,.4);
+color:white;
+font-size:15px;
+font-weight:700;
+text-shadow:1px 1px 0 rgba(0,0,0,.4);
 }
 
-/* BOTONES XP */
+/* BOTONES */
 
 .controls{
-    display:flex;
-    gap:6px;
+display:flex;
+gap:6px;
 }
 
 .ctrl{
-    width:22px;
-    height:22px;
-
-    border-radius:4px;
-
-    border:1px solid rgba(255,255,255,.5);
-
-    box-shadow:
-    inset 0 1px rgba(255,255,255,.45);
-
-    position:relative;
+width:22px;
+height:22px;
+border-radius:4px;
+border:1px solid rgba(255,255,255,.5);
+box-shadow:inset 0 1px rgba(255,255,255,.45);
+position:relative;
 }
 
 .ctrl:nth-child(1){
-    background:
-    linear-gradient(
-    to bottom,
-    #6cb2ff,
-    #2a7df0
-    );
+background:linear-gradient(to bottom,#6cb2ff,#2a7df0);
 }
 
 .ctrl:nth-child(1)::after{
-    content:"_";
-
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-    font-weight:bold;
+content:"_";
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-weight:bold;
 }
 
 .ctrl:nth-child(2){
-    background:
-    linear-gradient(
-    to bottom,
-    #6cb2ff,
-    #2a7df0
-    );
+background:linear-gradient(to bottom,#6cb2ff,#2a7df0);
 }
 
 .ctrl:nth-child(2)::after{
-    content:"□";
-
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-    font-size:12px;
+content:"□";
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:12px;
 }
 
 .ctrl:nth-child(3){
-    background:
-    linear-gradient(
-    to bottom,
-    #ff8f8f,
-    #e13a3a
-    );
+background:linear-gradient(to bottom,#ff8f8f,#e13a3a);
 }
 
 .ctrl:nth-child(3)::after{
-    content:"✕";
-
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-    font-size:12px;
+content:"✕";
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:12px;
 }
 
 /* CONTENT */
 
 .content{
-    padding:55px 40px;
-    text-align:center;
+padding:55px 40px;
+text-align:center;
+}
+
+/* LOGO */
+
+.logo-frame{
+width:200px;
+height:200px;
+margin:0 auto 30px;
+padding:12px;
+
+background:
+linear-gradient(
+145deg,
+#ffe59c,
+#a36d17
+);
+
+border:5px solid #6b4300;
+border-radius:18px;
+
+box-shadow:
+0 0 25px rgba(255,215,120,.3),
+inset 0 0 10px rgba(255,255,255,.2);
+
+position:relative;
+}
+
+.logo-frame::before{
+content:"✦";
+position:absolute;
+top:8px;
+left:12px;
+color:#fff4b5;
+font-size:18px;
+}
+
+.logo-frame::after{
+content:"✦";
+position:absolute;
+bottom:8px;
+right:12px;
+color:#fff4b5;
+font-size:18px;
+}
+
+.server-logo{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:10px;
+border:4px solid #2d1700;
+image-rendering:pixelated;
+animation:logoMove 6s ease-in-out infinite;
+}
+
+@keyframes logoMove{
+0%{transform:scale(1);}
+50%{transform:scale(1.03);}
+100%{transform:scale(1);}
 }
 
 /* TITULO */
 
 .main-title{
-    font-size:clamp(4rem,8vw,7rem);
+font-size:clamp(4rem,8vw,7rem);
+font-weight:900;
+letter-spacing:6px;
+font-family:'Orbitron',sans-serif;
+text-shadow:
+0 0 18px rgba(255,255,255,.12),
+5px 5px 0 rgba(0,0,0,.4);
+}
 
-    font-weight:900;
+.red-letter{
+color:#d60000;
+}
 
-    letter-spacing:5px;
-
-    background:
-    linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff0000 33%,
-    #ffffff 33%,
-    #ffffff 66%,
-    #ff0000 66%,
-    #ff0000 100%
-    );
-
-    -webkit-background-clip:text;
-
-    color:transparent;
-
-    text-shadow:
-    5px 5px 0 rgba(0,0,0,.4);
+.white-letter{
+color:#ffffff;
 }
 
 .subtitle{
-    margin-top:15px;
-
-    color:#222;
-
-    font-size:1.1rem;
+margin-top:18px;
+color:#222;
+font-family:'VT323',monospace;
+letter-spacing:1px;
+font-size:2rem;
 }
 
-/* STATS */
-
-.stats{
-    margin-top:40px;
-
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:18px;
+.hero-text{
+margin-top:16px;
+color:#333;
+font-family:'VT323',monospace;
+font-size:1.8rem;
 }
 
-.stat-card{
-    min-width:170px;
+/* BOTON */
 
-    padding:20px;
+.enter-btn{
+margin-top:28px;
+padding:18px 34px;
+border:none;
+border-radius:10px;
 
-    border-radius:10px;
+background:
+linear-gradient(
+to bottom,
+#61ff61,
+#28b828
+);
 
-    background:
-    linear-gradient(
-    to bottom,
-    #ffffff,
-    #dfe8f7
-    );
+color:black;
+font-weight:900;
+font-size:1rem;
+cursor:pointer;
 
-    border:2px solid #7da2ce;
+box-shadow:
+0 0 18px rgba(97,255,97,.25);
 
-    box-shadow:
-    inset 0 1px white,
-    0 4px 10px rgba(0,0,0,.12);
+transition:.25s ease;
+font-family:'Orbitron',sans-serif;
 }
 
-.stat-card h3{
-    color:#0046b7;
-    font-size:1.8rem;
+.enter-btn:hover{
+transform:scale(1.05);
 }
 
-.stat-card p{
-    margin-top:8px;
-    color:#333;
-}
-
-/* REDES */
+/* SOCIALS */
 
 .socials{
-    display:flex;
-    justify-content:center;
-    gap:22px;
-
-    margin-top:40px;
+display:flex;
+justify-content:center;
+gap:22px;
+margin-top:40px;
 }
 
 .social-icon{
-    width:62px;
-    height:62px;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    text-decoration:none;
-
-    color:white;
-
-    font-size:28px;
-
-    transition:.2s ease;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.25);
+width:62px;
+height:62px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+text-decoration:none;
+color:white;
+font-size:28px;
+transition:.2s ease;
+box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
 .social-icon:hover{
-    transform:scale(1.08);
+transform:scale(1.1) rotate(4deg);
 }
 
 .icon-kick{
-    background:#53fc18;
-    color:black;
+background:#53fc18;
+color:black;
 }
 
 .icon-yt{
-    background:#ff0000;
+background:#ff0000;
 }
 
 .icon-ig{
-    background:
-    linear-gradient(
-    45deg,
-    #f09433,
-    #bc1888
-    );
+background:
+linear-gradient(
+45deg,
+#f09433,
+#bc1888
+);
 }
 
 /* TEXTOS */
 
 h2{
-    color:#11428b;
-    font-size:2rem;
+color:#11428b;
+font-size:2rem;
+font-family:'Orbitron',sans-serif;
 }
 
 p{
-    color:#222;
+color:#222;
 }
 
 /* IP */
 
 .ip-box{
-    background:black;
+background:black;
+color:#53fc18;
+padding:16px;
+margin:25px auto;
+width:fit-content;
+border-radius:8px;
+font-size:1.4rem;
+font-family:monospace;
+border:3px solid #1d4aa8;
 
-    color:#53fc18;
+box-shadow:
+inset 0 0 12px rgba(83,252,24,.15),
+0 0 20px rgba(83,252,24,.12);
 
-    padding:16px;
+animation:glowip 2s infinite alternate;
+}
 
-    margin:25px auto;
+@keyframes glowip{
+from{
+box-shadow:
+inset 0 0 12px rgba(83,252,24,.15),
+0 0 10px rgba(83,252,24,.08);
+}
 
-    width:fit-content;
-
-    border-radius:8px;
-
-    font-size:1.4rem;
-    font-family:monospace;
-
-    border:3px solid #1d4aa8;
-
-    box-shadow:
-    inset 0 0 12px rgba(83,252,24,.15);
+to{
+box-shadow:
+inset 0 0 12px rgba(83,252,24,.25),
+0 0 24px rgba(83,252,24,.25);
+}
 }
 
 /* BOTONES */
 
 .win-btn{
-    padding:12px 24px;
+padding:12px 24px;
+border-radius:6px;
+border:2px solid #7da2ce;
 
-    border-radius:6px;
+background:
+linear-gradient(
+to bottom,
+#ffffff,
+#d7e7ff
+);
 
-    border:2px solid #7da2ce;
-
-    background:
-    linear-gradient(
-    to bottom,
-    #ffffff,
-    #d7e7ff
-    );
-
-    color:#003b91;
-
-    font-size:1rem;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.15s ease;
+color:#003b91;
+font-size:1rem;
+font-weight:700;
+cursor:pointer;
+transition:.15s ease;
+font-family:'Orbitron',sans-serif;
 }
 
 .win-btn:hover{
-    background:
-    linear-gradient(
-    to bottom,
-    #ffffff,
-    #c5dcff
-    );
+background:
+linear-gradient(
+to bottom,
+#ffffff,
+#c5dcff
+);
+
+transform:translateY(-2px);
 }
 
-/* DESCRIPCION */
+/* BOXES */
 
-.desc-box{
-    margin-top:20px;
+.desc-box,
+.rules-box,
+.lore-box{
+margin-top:25px;
+padding:24px;
+border-radius:8px;
 
-    padding:24px;
+background:
+linear-gradient(
+to bottom,
+#ffffff,
+#dfe8f7
+);
 
-    border-radius:8px;
-
-    background:white;
-
-    border:2px solid #7da2ce;
-
-    text-align:left;
-
-    line-height:1.7;
+border:2px solid #7da2ce;
+text-align:left;
+line-height:1.8;
+font-family:'VT323',monospace;
+font-size:1.7rem;
+position:relative;
+overflow:hidden;
+color:#111;
 }
 
-/* MODS DESPLEGABLE */
+.lore-box::before{
+content:"NALA";
+position:absolute;
+right:10px;
+bottom:-5px;
+font-size:4rem;
+opacity:.05;
+font-weight:bold;
+}
+
+.rules-box li{
+margin-bottom:10px;
+color:#111;
+}
+
+/* MODS */
 
 .mods-toggle{
-    margin-top:35px;
-
-    cursor:pointer;
-
-    user-select:none;
+margin-top:35px;
+cursor:pointer;
+user-select:none;
 }
 
 .mods-toggle p{
-    font-size:1rem;
-    font-weight:700;
-
-    color:#0046b7;
-
-    transition:.2s ease;
+font-size:1rem;
+font-weight:700;
+color:#0046b7;
+font-family:'Orbitron',sans-serif;
 }
-
-.mods-toggle:hover p{
-    transform:translateY(2px);
-}
-
-/* LISTA MODS */
 
 .mods-list{
-    margin-top:25px;
-
-    display:none;
-
-    flex-direction:column;
-
-    gap:18px;
+margin-top:25px;
+display:none;
+flex-direction:column;
+gap:18px;
 }
 
 .mods-list.active{
-    display:flex;
+display:flex;
 }
 
-/* TARJETAS MODS */
-
 .mod-card{
-    padding:20px;
+padding:20px;
+border-radius:10px;
 
-    border-radius:10px;
+background:
+linear-gradient(
+to bottom,
+#ffffff,
+#dfe8f7
+);
 
-    background:
-    linear-gradient(
-    to bottom,
-    #ffffff,
-    #dfe8f7
-    );
+border:2px solid #7da2ce;
+text-align:left;
 
-    border:2px solid #7da2ce;
+box-shadow:
+inset 0 1px white,
+0 4px 10px rgba(0,0,0,.12);
 
-    text-align:left;
+transition:.25s ease;
+}
 
-    box-shadow:
-    inset 0 1px white,
-    0 4px 10px rgba(0,0,0,.12);
+.mod-card:hover{
+transform:translateX(6px);
 }
 
 .mod-card h3{
-    color:#0046b7;
-
-    margin-bottom:10px;
-
-    font-size:1.2rem;
+color:#0046b7;
+margin-bottom:10px;
+font-size:1.2rem;
+font-family:'Orbitron',sans-serif;
 }
 
 .mod-card p{
-    color:#222;
+font-family:'VT323',monospace;
+font-size:1.5rem;
+color:#111;
+}
 
-    line-height:1.6;
+/* UPDATE POPUP */
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+padding:20px;
+}
+
+.popup.active{
+display:flex;
+}
+
+.popup-window{
+width:min(650px,95%);
+background:#ece9d8;
+border:3px solid #0054e3;
+border-radius:10px;
+overflow:hidden;
+animation:popupAnim .25s ease;
+}
+
+@keyframes popupAnim{
+from{
+transform:scale(.8);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.popup-content{
+padding:30px;
+font-family:'VT323',monospace;
+font-size:1.8rem;
+color:#111;
+line-height:1.7;
+}
+
+.update-item{
+margin-bottom:20px;
+padding:14px;
+background:white;
+border:2px solid #7da2ce;
+border-radius:8px;
 }
 
 /* FOOTER */
 
 footer{
-    padding:30px;
+padding:30px;
+text-align:center;
+color:rgba(255,255,255,.55);
+font-size:.95rem;
+}
 
-    text-align:center;
+@media(max-width:700px){
 
-    color:rgba(255,255,255,.55);
+.main-title{
+font-size:3.2rem;
+}
 
-    font-size:.95rem;
+.logo-frame{
+width:160px;
+height:160px;
+}
+
+.content{
+padding:40px 22px;
+}
+
 }
 
 </style>
@@ -646,7 +755,7 @@ footer{
 
 <div class="parallax-bg"></div>
 
-<!-- MENU -->
+<div class="particles" id="particles"></div>
 
 <div class="menu-btn" onclick="toggleSidebar()">
 
@@ -660,21 +769,58 @@ footer{
 
 </div>
 
-<!-- SIDEBAR -->
-
 <div class="sidebar" id="sidebar">
 
 <a href="#inicio">🏠 Inicio</a>
-
+<a href="#lore">👁 Lore</a>
 <a href="#server">🎮 Servidor</a>
-
 <a href="#mods">📦 Mods</a>
-
 <a href="#info">📖 Información</a>
+<a onclick="openUpdates()">🖥 Updates</a>
 
 </div>
 
-<!-- INICIO -->
+<!-- POPUP -->
+
+<div class="popup" id="updatesPopup">
+
+<div class="popup-window">
+
+<div class="titlebar">
+
+<span>Updates_Logs.exe</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl" onclick="closeUpdates()"></div>
+</div>
+
+</div>
+
+<div class="popup-content">
+
+<div class="update-item">
+⚠ El nether está bloqueado temporalmente.
+</div>
+
+<div class="update-item">
+⚔ Toda armadura de diamante encantada será eliminada hasta que NALA lo permita.
+</div>
+
+<div class="update-item">
+📜 Las misiones y eventos diarios aparecerán aquí.
+</div>
+
+<div class="update-item">
+👁 Nala está observando el servidor...
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <section id="inicio">
 
@@ -694,30 +840,25 @@ footer{
 
 <div class="content">
 
-<h1 class="main-title">N_LAND</h1>
+<div class="logo-frame">
+<img class="server-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwXr1pT25M3geQnhnMl3E1PBsAFOx1ipFLqQ&s">
+</div>
+
+<h1 class="main-title">
+<span class="red-letter">N</span><span class="white-letter">_LAN</span><span class="red-letter">D</span>
+</h1>
 
 <p class="subtitle">
 Servidor survival humilde con mods
 </p>
 
-<div class="stats">
+<p class="hero-text">
+survival con mods
+</p>
 
-<div class="stat-card">
-<h3>cada vez que luis</h3>
-<p>no prende</p>
-</div>
-
-<div class="stat-card">
-<h3>+40</h3>
-<p>Mods instalados</p>
-</div>
-
-<div class="stat-card">
-<h3>luisardo</h3>
-<p>Comunidad</p>
-</div>
-
-</div>
+<button class="enter-btn" onclick="document.getElementById('server').scrollIntoView({behavior:'smooth'})">
+ENTRAR AL SERVER
+</button>
 
 <div class="socials">
 
@@ -740,7 +881,65 @@ Servidor survival humilde con mods
 
 </section>
 
-<!-- SERVER -->
+<section id="lore">
+
+<div class="window">
+
+<div class="titlebar">
+
+<span>Nala_Lore.sys</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>LORE DEL SERVER</h2>
+
+<div class="lore-box">
+
+N_LAND no fue creado por humanos.
+
+<br><br>
+
+Se dice que Nala, una deidad antigua y silenciosa, creó este mundo para divertirse observando jugadores sobrevivir, pelear, construir y destruirse entre ellos.
+Durante años alteró el mundo a su gusto.
+
+<br><br>
+
+Pero algo salió mal.
+
+<br><br>
+
+Después de una guerra que casi destruye el servidor completo, Nala fue encerrada en otra dimensión.
+
+
+<br><br>
+
+Se dice que donde se encuentra ahora es el Nether...
+pero Lacobraa, usando el poder prohibido del queque, bloqueó la dimensión para evitar su regreso.
+
+<br><br>
+
+Muchos creen que fue sellada para siempre...
+pero otros aseguran que todavía observa el mundo desde fuera.
+
+<br><br>
+
+Tal vez Nala nunca abandonó realmente N_LAND.
+Tal vez solamente está esperando.
+
+</div>
+
+</div>
+</div>
+
+</section>
 
 <section id="server">
 
@@ -762,7 +961,7 @@ Servidor survival humilde con mods
 
 <h2>IP DEL SERVIDOR</h2>
 
-<p>
+<p style="font-family:'VT323',monospace;font-size:1.8rem;color:#111;">
 Minecraft Java forge 1.20.1
 </p>
 
@@ -778,8 +977,6 @@ Copiar IP
 </div>
 
 </section>
-
-<!-- MODS -->
 
 <section id="mods">
 
@@ -801,7 +998,7 @@ Copiar IP
 
 <h2>DESCARGAR MODPACK</h2>
 
-<p>
+<p style="font-family:'VT323',monospace;font-size:1.8rem;color:#111;">
 Necesario para entrar al server.
 </p>
 
@@ -815,15 +1012,11 @@ Descargar Mods/emotes
 
 </a>
 
-<!-- FLECHITA -->
-
 <div class="mods-toggle" onclick="toggleMods()">
 
 <p id="modsArrow">▼ Ver mods incluidos</p>
 
 </div>
-
-<!-- LISTA MODS -->
 
 <div class="mods-list" id="modsList">
 
@@ -832,8 +1025,7 @@ Descargar Mods/emotes
 <h3>Alex's Mobs</h3>
 
 <p>
-Agrega animales raros, criaturas meme y mobs GOD como el cocodrilo, mapache, orca y más.
-Hace el survival mucho menos vacío.
+Animales raros, criaturas extravagantes y entidades misticas
 </p>
 
 </div>
@@ -843,8 +1035,7 @@ Hace el survival mucho menos vacío.
 <h3>Emotecraft</h3>
 
 <p>
-Permite hacer emotes y bailes en multiplayer.
-Sirve para hacer estupideces con el chat XD.
+Emotes y bailes multiplayer XD.
 </p>
 
 </div>
@@ -854,18 +1045,7 @@ Sirve para hacer estupideces con el chat XD.
 <h3>Artifacts</h3>
 
 <p>
-Añade objetos especiales con habilidades tipo más velocidad, más vida o buffs raros.
-</p>
-
-</div>
-
-<div class="mod-card">
-
-<h3>Xaero's Minimap</h3>
-
-<p>
-Minimapa simple y GOD.
-Ayuda a no perderte y marcar lugares importantes.
+Objetos especiales con buffs raros.
 </p>
 
 </div>
@@ -875,19 +1055,7 @@ Ayuda a no perderte y marcar lugares importantes.
 <h3>Born In Chaos</h3>
 
 <p>
-Agrega enemigos cursed y cosas medio traumantes.
-A veces salen cosas que ni deberían existir 😭
-</p>
-
-</div>
-
-<div class="mod-card">
-
-<h3>When Dungeons Arise</h3>
-
-<p>
-Añade estructuras enormes y dungeons gigantes.
-También puede hacer explotar Aternos 👍
+Enemigos cursed y cosas traumantes de otra dimension??
 </p>
 
 </div>
@@ -898,8 +1066,6 @@ También puede hacer explotar Aternos 👍
 </div>
 
 </section>
-
-<!-- INFO -->
 
 <section id="info">
 
@@ -927,16 +1093,27 @@ N_LAND es un servidor survival hecho para jugar con la comunidad del stream.
 
 <br><br>
 
-Tiene mods y ya XD.
-
-<br><br>
-
-entra si quieres jugar .
+Hay mods, caos, criaturas cursed y cosas...
 
 <br><br>
 
 A veces Aternos explota, se lagea o se apaga solo...
 pero igual se intenta 👍
+
+</div>
+
+<div class="rules-box">
+
+<h2>REGLAS</h2>
+
+<br>
+
+<ul>
+<li>No explotar casas.</li>
+<li>No matar ajolotes.</li>
+<li>Si Aternos explota no llorar.</li>
+<li>No traficar aldeanos.</li>
+</ul>
 
 </div>
 
@@ -951,13 +1128,9 @@ N_LAND © 2026
 
 <script>
 
-/* SIDEBAR */
-
 function toggleSidebar(){
 document.getElementById("sidebar").classList.toggle("active");
 }
-
-/* CERRAR SIDEBAR */
 
 document.addEventListener("click",function(e){
 
@@ -970,8 +1143,6 @@ sidebar.classList.remove("active");
 
 });
 
-/* COPIAR IP */
-
 function copiarIP(){
 
 navigator.clipboard.writeText("N_LAND.aternos.me:20942");
@@ -979,8 +1150,6 @@ navigator.clipboard.writeText("N_LAND.aternos.me:20942");
 alert("IP copiada.");
 
 }
-
-/* MODS */
 
 function toggleMods(){
 
@@ -997,7 +1166,13 @@ arrow.innerText="▼ Ver mods incluidos";
 
 }
 
-/* ANIMACION */
+function openUpdates(){
+document.getElementById("updatesPopup").classList.add("active");
+}
+
+function closeUpdates(){
+document.getElementById("updatesPopup").classList.remove("active");
+}
 
 const sections=document.querySelectorAll("section");
 
@@ -1018,6 +1193,29 @@ threshold:.15
 sections.forEach(section=>{
 observer.observe(section);
 });
+
+/* PARTICULAS */
+
+const particles = document.getElementById("particles");
+
+for(let i=0;i<45;i++){
+
+const pixel=document.createElement("div");
+
+pixel.classList.add("pixel");
+
+pixel.style.left=Math.random()*100+"vw";
+
+pixel.style.animationDuration=(6+Math.random()*10)+"s";
+
+pixel.style.opacity=Math.random()*.3;
+
+pixel.style.width=(2+Math.random()*4)+"px";
+pixel.style.height=pixel.style.width;
+
+particles.appendChild(pixel);
+
+}
 
 </script>
 
