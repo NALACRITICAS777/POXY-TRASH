@@ -2,95 +2,80 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N_LAND | Servidor Minecraft</title>
+    <title>N_LAND | Comunidad Luis</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@500&display=swap');
+
         :root {
-            --bg: #030305;
-            --accent: #53fc18; /* Color verde tipo Minecraft */
-            --text: #ffffff;
-            --overlay: rgba(0, 0, 0, 0.85);
+            --bg: #050508;
+            --accent: #53fc18;
+            --panel: rgba(15, 15, 20, 0.9);
+            --font-main: 'Orbitron', sans-serif;
         }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg); color: var(--text);
-            background: url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        /* Menú Hamburguesa */
-        .menu-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 100;
-            cursor: pointer; background: rgba(0,0,0,0.6); padding: 15px; border-radius: 8px;
-        }
-        .menu-btn div { width: 25px; height: 3px; background: white; margin: 5px 0; }
-
-        /* Navegación */
-        .nav-overlay {
-            height: 100%; width: 0; position: fixed; z-index: 200; top: 0; right: 0;
-            background-color: var(--overlay); overflow-x: hidden; transition: 0.5s;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        .nav-overlay a {
-            padding: 15px; text-decoration: none; font-size: 25px; color: #f1f1f1;
-            display: block; transition: 0.3s; font-weight: bold;
-        }
-        .nav-overlay a:hover { color: var(--accent); }
-
-        /* Contenido Principal */
-        .main-container {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100vh; background: rgba(0,0,0,0.5);
-        }
-        h1 { font-size: 4rem; margin: 0; color: var(--accent); text-shadow: 0 0 20px rgba(83, 252, 24, 0.5); }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Rajdhani', sans-serif; scroll-behavior: smooth; }
         
-        .box {
-            background: rgba(15, 15, 20, 0.9); padding: 40px; border-radius: 15px;
-            text-align: center; border: 1px solid #333; max-width: 500px;
-        }
+        /* Fondo */
+        .bg-img { position: fixed; top:0; left:0; width: 100%; height: 100%; z-index: -1; 
+                  background: url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1') no-repeat center center; 
+                  background-size: cover; opacity: 0.2; }
+
+        /* Menú y Navegación */
+        .menu-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; font-size: 30px; }
+        .nav-panel { position: fixed; top: 0; right: -300px; width: 280px; height: 100vh; background: var(--panel); transition: 0.4s; border-left: 2px solid var(--accent); z-index: 999; padding-top: 100px; }
+        .nav-panel a { display: block; padding: 20px; color: white; text-decoration: none; font-size: 1.5rem; text-transform: uppercase; border-bottom: 1px solid #222; }
+        .nav-panel a:hover { background: var(--accent); color: black; }
+
+        /* Estilo de Secciones */
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); background: rgba(0,0,0,0.4); margin: 20px 0; }
+        h1 { font-family: var(--font-main); font-size: 4rem; color: var(--accent); text-transform: uppercase; }
+        
+        .btn-social { padding: 15px 40px; margin: 10px; background: transparent; border: 2px solid var(--accent); color: var(--accent); font-weight: bold; text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
+        .btn-social:hover { background: var(--accent); color: black; }
     </style>
 </head>
 <body>
 
-<div class="menu-btn" onclick="openNav()">
-    <div></div><div></div><div></div>
+<div class="bg-img"></div>
+
+<div class="menu-toggle" onclick="toggleNav()">☰</div>
+<div class="nav-panel" id="nav">
+    <a href="#home">Home</a>
+    <a href="#ip">IP Servidor</a>
+    <a href="#mods">Descarga Mods</a>
+    <a href="#preguntas">Preguntas</a>
 </div>
 
-<div id="myNav" class="nav-overlay">
-    <a href="javascript:void(0)" onclick="closeNav()" style="position:absolute; top:20px; right:20px;">✕</a>
-    <a href="#" onclick="showSection('ip')">IP DEL SERVIDOR</a>
-    <a href="#" onclick="showSection('mods')">DESCARGAR MODS</a>
-    <a href="#" onclick="showSection('desc')">DESCRIPCIÓN</a>
-</div>
-
-<div class="main-container">
-    <div class="box" id="content">
-        <h1>N_LAND</h1>
-        <p>Bienvenido al hub oficial del servidor.</p>
-        <p id="dynamic-text">Selecciona una opción en el menú superior.</p>
+<section id="home">
+    <h1>N_LAND</h1>
+    <p>Comunidad oficial de Luisardito</p>
+    <div>
+        <a href="https://kick.com/luisardito" class="btn-social">KICK</a>
+        <a href="https://www.youtube.com/@Luisarditoprime" class="btn-social">YOUTUBE</a>
+        <a href="https://www.instagram.com/luisarditooo" class="btn-social">INSTAGRAM</a>
     </div>
-</div>
+</section>
+
+<section id="ip">
+    <h2>IP DEL SERVIDOR</h2>
+    <h1 style="font-size: 2rem;">N_LAND.aternos.me:20942</h1>
+</section>
+
+<section id="mods">
+    <h2>MODS</h2>
+    <p>Descarga el pack necesario para el servidor.</p>
+    <a href="#" class="btn-social">DESCARGAR .RAR</a>
+</section>
+
+<section id="preguntas">
+    <h2>PREGUNTAS</h2>
+    <p>¿Tienes dudas? Consulta nuestras FAQs.</p>
+</section>
 
 <script>
-    function openNav() { document.getElementById("myNav").style.width = "100%"; }
-    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
-
-    function showSection(type) {
-        const content = document.getElementById('dynamic-text');
-        const box = document.getElementById('content');
-        
-        if(type === 'ip') {
-            content.innerHTML = "<b>IP:</b> N_LAND.aternos.me:20942<br><small>(Click para copiar)</small>";
-            content.style.cursor = "pointer";
-            content.onclick = () => { navigator.clipboard.writeText("N_LAND.aternos.me:20942"); alert("IP copiada"); };
-        } else if(type === 'mods') {
-            content.innerHTML = "<a href='#' style='color:var(--accent)'>Click aquí para bajar el .rar de mods</a>";
-        } else {
-            content.innerHTML = "Un servidor de Minecraft para la comunidad. ¡Diviértete!";
-        }
-        closeNav();
+    function toggleNav() {
+        const nav = document.getElementById("nav");
+        nav.style.right = nav.style.right === "0px" ? "-300px" : "0px";
     }
 </script>
 
