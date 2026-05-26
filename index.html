@@ -1,100 +1,1025 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>N_LAND | Servidor</title>
-    <link rel="icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/3f87bd40-3b9a-40e0-8501-0e6c4040dc0c-profile_image-300x300.png" type="image/png">
-    
-    <style>
-        :root {
-            --win-bg: #c0c0c0;
-            --win-light: #ffffff;
-            --win-dark: #808080;
-            --win-black: #000000;
-        }
 
-        html { scroll-behavior: smooth; }
-        body { margin: 0; font-family: 'Courier New', Courier, monospace; background: #050505; color: white; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .parallax-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1') no-repeat center center;
-            background-size: cover; filter: brightness(0.3) blur(4px);
-        }
+<title>N_LAND</title>
 
-        /* TÍTULO SIN CUADRO */
-        .title-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        h1.main-title { 
-            font-size: 7rem; margin: 0; color: #ff0000; text-shadow: 5px 5px 0px #fff; 
-            text-transform: uppercase; letter-spacing: 10px;
-        }
+<link rel="icon" href="https://static-cdn.jtvnw.net/jtv_user_pictures/3f87bd40-3b9a-40e0-8501-0e6c4040dc0c-profile_image-300x300.png">
 
-        /* BOTONES REDES ESTILO WIN98 */
-        .social-container { display: flex; gap: 15px; margin-top: 30px; }
-        .win-btn {
-            background: var(--win-bg); color: black; border-top: 2px solid var(--win-light);
-            border-left: 2px solid var(--win-light); border-bottom: 2px solid var(--win-black);
-            border-right: 2px solid var(--win-black); padding: 10px 20px; font-weight: bold;
-            text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
-        }
-        .win-btn:active { border: 2px solid var(--win-black); }
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-        /* MENÚ BLOQUE DE TIERRA MC */
-        .menu-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; padding: 15px; background: #8B4513; border: 4px solid #5D2E0A; font-weight: bold; }
-        .sidebar {
-            position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
-            background: url('https://www.minecrafttexturepacks.com/wp-content/uploads/2012/03/dirt.jpg');
-            border-left: 5px solid #5D2E0A; transition: 0.5s; z-index: 999; padding-top: 100px;
-        }
-        .sidebar a { display: block; padding: 20px; color: white; text-decoration: none; font-size: 1.5rem; background: rgba(0,0,0,0.5); margin: 10px; border: 2px solid #333; }
-        .sidebar a:hover { background: #53fc18; color: black; }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* CUADROS WIN98 PARA INFO */
-        .win-window { background: var(--win-bg); padding: 2px; width: 80%; max-width: 600px; margin: 100px auto; color: black; border: 2px solid black; box-shadow: 10px 10px 0px rgba(0,0,0,0.5); }
-        .win-bar { background: #000080; color: white; padding: 5px; font-weight: bold; display: flex; justify-content: space-between; }
-        .win-body { padding: 20px; text-align: center; }
-    </style>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+    background:#0d0d0d;
+}
+
+/* FONDO */
+
+.parallax-bg{
+    position:fixed;
+    inset:0;
+
+    z-index:-2;
+
+    background:
+    linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+    url('https://preview.redd.it/nala-estaba-sufriendo-jsjjsjaj-v0-2ivvf8feb0ke1.jpeg?auto=webp&s=4dd8ae471d1c5cb0f13178d8b31fe2428d7116d1');
+
+    background-size:cover;
+    background-position:center;
+
+    filter:blur(2px);
+
+    transform:scale(1.03);
+}
+
+/* MENU */
+
+.menu-btn{
+    position:fixed;
+
+    top:18px;
+    right:18px;
+
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:rgba(18,18,18,.92);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.menu-btn:hover{
+    transform:translateY(-2px);
+}
+
+.menu-btn p{
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.hamburger{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.hamburger span{
+    width:22px;
+    height:3px;
+
+    background:white;
+
+    border-radius:999px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+
+    top:0;
+    right:-320px;
+
+    width:280px;
+    height:100vh;
+
+    z-index:999;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(18,18,18,.98),
+    rgba(10,10,10,.98)
+    );
+
+    backdrop-filter:blur(14px);
+
+    border-left:1px solid rgba(255,255,255,.08);
+
+    transition:.35s ease;
+
+    padding-top:90px;
+}
+
+.sidebar.active{
+    right:0;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:18px 24px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:1rem;
+    font-weight:600;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    transition:.2s ease;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.06);
+    padding-left:32px;
+}
+
+/* SECCIONES */
+
+section{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:90px 20px;
+
+    opacity:0;
+    transform:translateY(80px);
+
+    transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* WINDOWS XP */
+
+.window{
+    width:min(980px,95%);
+
+    overflow:hidden;
+
+    background:#ece9d8;
+
+    border:3px solid #0054e3;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.45);
+}
+
+/* TOPBAR */
+
+.titlebar{
+    background:
+    linear-gradient(
+    to bottom,
+    #3a93ff 0%,
+    #2072ef 45%,
+    #0057d8 100%
+    );
+
+    padding:10px 12px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:2px solid #003ea8;
+}
+
+.titlebar span{
+    color:white;
+
+    font-size:15px;
+    font-weight:700;
+
+    text-shadow:
+    1px 1px 0 rgba(0,0,0,.4);
+}
+
+/* BOTONES XP */
+
+.controls{
+    display:flex;
+    gap:6px;
+}
+
+.ctrl{
+    width:22px;
+    height:22px;
+
+    border-radius:4px;
+
+    border:1px solid rgba(255,255,255,.5);
+
+    box-shadow:
+    inset 0 1px rgba(255,255,255,.45);
+
+    position:relative;
+}
+
+.ctrl:nth-child(1){
+    background:
+    linear-gradient(
+    to bottom,
+    #6cb2ff,
+    #2a7df0
+    );
+}
+
+.ctrl:nth-child(1)::after{
+    content:"_";
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-weight:bold;
+}
+
+.ctrl:nth-child(2){
+    background:
+    linear-gradient(
+    to bottom,
+    #6cb2ff,
+    #2a7df0
+    );
+}
+
+.ctrl:nth-child(2)::after{
+    content:"□";
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:12px;
+}
+
+.ctrl:nth-child(3){
+    background:
+    linear-gradient(
+    to bottom,
+    #ff8f8f,
+    #e13a3a
+    );
+}
+
+.ctrl:nth-child(3)::after{
+    content:"✕";
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:12px;
+}
+
+/* CONTENT */
+
+.content{
+    padding:55px 40px;
+    text-align:center;
+}
+
+/* TITULO */
+
+.main-title{
+    font-size:clamp(4rem,8vw,7rem);
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #ff0000 0%,
+    #ff0000 33%,
+    #ffffff 33%,
+    #ffffff 66%,
+    #ff0000 66%,
+    #ff0000 100%
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+    5px 5px 0 rgba(0,0,0,.4);
+}
+
+.subtitle{
+    margin-top:15px;
+
+    color:#222;
+
+    font-size:1.1rem;
+}
+
+/* STATS */
+
+.stats{
+    margin-top:40px;
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+}
+
+.stat-card{
+    min-width:170px;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #ffffff,
+    #dfe8f7
+    );
+
+    border:2px solid #7da2ce;
+
+    box-shadow:
+    inset 0 1px white,
+    0 4px 10px rgba(0,0,0,.12);
+}
+
+.stat-card h3{
+    color:#0046b7;
+    font-size:1.8rem;
+}
+
+.stat-card p{
+    margin-top:8px;
+    color:#333;
+}
+
+/* REDES */
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+
+    margin-top:40px;
+}
+
+.social-icon{
+    width:62px;
+    height:62px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:28px;
+
+    transition:.2s ease;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.25);
+}
+
+.social-icon:hover{
+    transform:scale(1.08);
+}
+
+.icon-kick{
+    background:#53fc18;
+    color:black;
+}
+
+.icon-yt{
+    background:#ff0000;
+}
+
+.icon-ig{
+    background:
+    linear-gradient(
+    45deg,
+    #f09433,
+    #bc1888
+    );
+}
+
+/* TEXTOS */
+
+h2{
+    color:#11428b;
+    font-size:2rem;
+}
+
+p{
+    color:#222;
+}
+
+/* IP */
+
+.ip-box{
+    background:black;
+
+    color:#53fc18;
+
+    padding:16px;
+
+    margin:25px auto;
+
+    width:fit-content;
+
+    border-radius:8px;
+
+    font-size:1.4rem;
+    font-family:monospace;
+
+    border:3px solid #1d4aa8;
+
+    box-shadow:
+    inset 0 0 12px rgba(83,252,24,.15);
+}
+
+/* BOTONES */
+
+.win-btn{
+    padding:12px 24px;
+
+    border-radius:6px;
+
+    border:2px solid #7da2ce;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #ffffff,
+    #d7e7ff
+    );
+
+    color:#003b91;
+
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.15s ease;
+}
+
+.win-btn:hover{
+    background:
+    linear-gradient(
+    to bottom,
+    #ffffff,
+    #c5dcff
+    );
+}
+
+/* DESCRIPCION */
+
+.desc-box{
+    margin-top:20px;
+
+    padding:24px;
+
+    border-radius:8px;
+
+    background:white;
+
+    border:2px solid #7da2ce;
+
+    text-align:left;
+
+    line-height:1.7;
+}
+
+/* MODS DESPLEGABLE */
+
+.mods-toggle{
+    margin-top:35px;
+
+    cursor:pointer;
+
+    user-select:none;
+}
+
+.mods-toggle p{
+    font-size:1rem;
+    font-weight:700;
+
+    color:#0046b7;
+
+    transition:.2s ease;
+}
+
+.mods-toggle:hover p{
+    transform:translateY(2px);
+}
+
+/* LISTA MODS */
+
+.mods-list{
+    margin-top:25px;
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.mods-list.active{
+    display:flex;
+}
+
+/* TARJETAS MODS */
+
+.mod-card{
+    padding:20px;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #ffffff,
+    #dfe8f7
+    );
+
+    border:2px solid #7da2ce;
+
+    text-align:left;
+
+    box-shadow:
+    inset 0 1px white,
+    0 4px 10px rgba(0,0,0,.12);
+}
+
+.mod-card h3{
+    color:#0046b7;
+
+    margin-bottom:10px;
+
+    font-size:1.2rem;
+}
+
+.mod-card p{
+    color:#222;
+
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    padding:30px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:.95rem;
+}
+
+</style>
 </head>
+
 <body>
 
 <div class="parallax-bg"></div>
 
-<div class="menu-btn" onclick="document.getElementById('sidebar').style.right='0'">MENU</div>
+<!-- MENU -->
 
-<div class="sidebar" id="sidebar">
-    <a href="#inicio" onclick="document.getElementById('sidebar').style.right='-300px'">INICIO</a>
-    <a href="#servidor" onclick="document.getElementById('sidebar').style.right='-300px'">IP SERVER</a>
-    <a href="#descargas" onclick="document.getElementById('sidebar').style.right='-300px'">MODS</a>
+<div class="menu-btn" onclick="toggleSidebar()">
+
+<div class="hamburger">
+<span></span>
+<span></span>
+<span></span>
 </div>
 
-<section id="inicio" class="title-container">
-    <h1 class="main-title">N_LAND</h1>
-    <div class="social-container">
-        <a href="https://kick.com/luisardito" class="win-btn">KICK</a>
-        <a href="https://www.youtube.com/@Luisarditoprime" class="win-btn">YOUTUBE</a>
-        <a href="https://www.instagram.com/luisarditooo" class="win-btn">INSTAGRAM</a>
-    </div>
+<p>MENÚ</p>
+
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+<a href="#inicio">🏠 Inicio</a>
+
+<a href="#server">🎮 Servidor</a>
+
+<a href="#mods">📦 Mods</a>
+
+<a href="#info">📖 Información</a>
+
+</div>
+
+<!-- INICIO -->
+
+<section id="inicio">
+
+<div class="window">
+
+<div class="titlebar">
+
+<span>N_LAND.exe</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+</div>
+
+</div>
+
+<div class="content">
+
+<h1 class="main-title">N_LAND</h1>
+
+<p class="subtitle">
+Servidor survival humilde con mods
+</p>
+
+<div class="stats">
+
+<div class="stat-card">
+<h3>cada vez que luis</h3>
+<p>no prende</p>
+</div>
+
+<div class="stat-card">
+<h3>+40</h3>
+<p>Mods instalados</p>
+</div>
+
+<div class="stat-card">
+<h3>luisardo</h3>
+<p>Comunidad</p>
+</div>
+
+</div>
+
+<div class="socials">
+
+<a href="https://kick.com/luisardito" target="_blank" class="social-icon icon-kick">
+<i class="fa-brands fa-kickstarter-k"></i>
+</a>
+
+<a href="https://www.youtube.com/@Luisarditoprime" target="_blank" class="social-icon icon-yt">
+<i class="fa-brands fa-youtube"></i>
+</a>
+
+<a href="https://www.instagram.com/luisarditooo" target="_blank" class="social-icon icon-ig">
+<i class="fa-brands fa-instagram"></i>
+</a>
+
+</div>
+
+</div>
+</div>
+
 </section>
 
-<section id="servidor">
-    <div class="win-window">
-        <div class="win-bar"><span>IP_SERVER.exe</span><span>X</span></div>
-        <div class="win-body">
-            <h2>IP DEL SERVIDOR</h2>
-            <div style="background: white; padding: 20px; border: 2px inset gray;">N_LAND.aternos.me:20942</div>
-        </div>
-    </div>
+<!-- SERVER -->
+
+<section id="server">
+
+<div class="window">
+
+<div class="titlebar">
+
+<span>Server_Connection.exe</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>IP DEL SERVIDOR</h2>
+
+<p>
+Minecraft Java forge 1.20.1
+</p>
+
+<div class="ip-box">
+N_LAND.aternos.me:20942
+</div>
+
+<button class="win-btn" onclick="copiarIP()">
+Copiar IP
+</button>
+
+</div>
+</div>
+
 </section>
 
-<section id="descargas">
-    <div class="win-window">
-        <div class="win-bar"><span>MODS.rar</span><span>X</span></div>
-        <div class="win-body">
-            <h2>DESCARGA MODS</h2>
-            <a href="https://www.mediafire.com/file/q676fxngf4yeaud/Minecraft.rar/file" class="win-btn">DESCARGAR AHORA</a>
-        </div>
-    </div>
+<!-- MODS -->
+
+<section id="mods">
+
+<div class="window">
+
+<div class="titlebar">
+
+<span>Mods.rar</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>DESCARGAR MODPACK</h2>
+
+<p>
+Necesario para entrar al server.
+</p>
+
+<br>
+
+<a href="https://www.mediafire.com/file/q676fxngf4yeaud/Minecraft.rar/file" target="_blank">
+
+<button class="win-btn">
+Descargar Mods/emotes
+</button>
+
+</a>
+
+<!-- FLECHITA -->
+
+<div class="mods-toggle" onclick="toggleMods()">
+
+<p id="modsArrow">▼ Ver mods incluidos</p>
+
+</div>
+
+<!-- LISTA MODS -->
+
+<div class="mods-list" id="modsList">
+
+<div class="mod-card">
+
+<h3>Alex's Mobs</h3>
+
+<p>
+Agrega animales raros, criaturas meme y mobs GOD como el cocodrilo, mapache, orca y más.
+Hace el survival mucho menos vacío.
+</p>
+
+</div>
+
+<div class="mod-card">
+
+<h3>Emotecraft</h3>
+
+<p>
+Permite hacer emotes y bailes en multiplayer.
+Sirve para hacer estupideces con el chat XD.
+</p>
+
+</div>
+
+<div class="mod-card">
+
+<h3>Artifacts</h3>
+
+<p>
+Añade objetos especiales con habilidades tipo más velocidad, más vida o buffs raros.
+</p>
+
+</div>
+
+<div class="mod-card">
+
+<h3>Xaero's Minimap</h3>
+
+<p>
+Minimapa simple y GOD.
+Ayuda a no perderte y marcar lugares importantes.
+</p>
+
+</div>
+
+<div class="mod-card">
+
+<h3>Born In Chaos</h3>
+
+<p>
+Agrega enemigos cursed y cosas medio traumantes.
+A veces salen cosas que ni deberían existir 😭
+</p>
+
+</div>
+
+<div class="mod-card">
+
+<h3>When Dungeons Arise</h3>
+
+<p>
+Añade estructuras enormes y dungeons gigantes.
+También puede hacer explotar Aternos 👍
+</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </section>
+
+<!-- INFO -->
+
+<section id="info">
+
+<div class="window">
+
+<div class="titlebar">
+
+<span>Readme.txt</span>
+
+<div class="controls">
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+<div class="ctrl"></div>
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>¿QUÉ ES N_LAND?</h2>
+
+<div class="desc-box">
+
+N_LAND es un servidor survival hecho para jugar con la comunidad del stream.
+
+<br><br>
+
+Tiene mods y ya XD.
+
+<br><br>
+
+entra si quieres jugar .
+
+<br><br>
+
+A veces Aternos explota, se lagea o se apaga solo...
+pero igual se intenta 👍
+
+</div>
+
+</div>
+</div>
+
+</section>
+
+<footer>
+N_LAND © 2026
+</footer>
+
+<script>
+
+/* SIDEBAR */
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("active");
+}
+
+/* CERRAR SIDEBAR */
+
+document.addEventListener("click",function(e){
+
+const sidebar=document.getElementById("sidebar");
+const btn=document.querySelector(".menu-btn");
+
+if(!sidebar.contains(e.target) && !btn.contains(e.target)){
+sidebar.classList.remove("active");
+}
+
+});
+
+/* COPIAR IP */
+
+function copiarIP(){
+
+navigator.clipboard.writeText("N_LAND.aternos.me:20942");
+
+alert("IP copiada.");
+
+}
+
+/* MODS */
+
+function toggleMods(){
+
+const mods=document.getElementById("modsList");
+const arrow=document.getElementById("modsArrow");
+
+mods.classList.toggle("active");
+
+if(mods.classList.contains("active")){
+arrow.innerText="▲ Ocultar mods";
+}else{
+arrow.innerText="▼ Ver mods incluidos";
+}
+
+}
+
+/* ANIMACION */
+
+const sections=document.querySelectorAll("section");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+
+});
+
+},{
+threshold:.15
+});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
 
 </body>
 </html>
